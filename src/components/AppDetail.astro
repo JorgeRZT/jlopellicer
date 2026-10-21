@@ -36,7 +36,7 @@ const repoUrl = `https://github.com/${app.repo}`;
           <h2>{t.screenshots}</h2>
           <div class="shots">
             {app.screenshots.map((x) => (
-              <a href={x.src} target="_blank" rel="noopener"><img src={x.src} alt={x.alt[lang]} loading="lazy" width="1120" height="800" /></a>
+              <button type="button" class="shot" data-src={x.src} data-alt={x.alt[lang]}><img src={x.src} alt={x.alt[lang]} loading="lazy" width="1120" height="800" /></button>
             ))}
           </div>
         </>
@@ -49,7 +49,22 @@ const repoUrl = `https://github.com/${app.repo}`;
       {app.note && <p class="muted note">{app.note[lang]}</p>}
     </article>
   </div>
+  <dialog id="lightbox" aria-label={t.screenshots}>
+    <button type="button" class="close" aria-label="Close">×</button>
+    <img alt="" />
+  </dialog>
 </Base>
+<script>
+  const box = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const big = box?.querySelector('img');
+  document.querySelectorAll<HTMLButtonElement>('.shot').forEach((b) => b.addEventListener('click', () => {
+    if (!box || !big) return;
+    big.src = b.dataset.src!;
+    big.alt = b.dataset.alt!;
+    box.showModal();
+  }));
+  box?.addEventListener('click', () => box.close());
+</script>
 <style>
   .detail { padding: 2.5rem 0 4rem; max-width: 680px; }
   .back { font-size: .9rem; color: var(--muted); }
@@ -61,9 +76,16 @@ const repoUrl = `https://github.com/${app.repo}`;
   .btn small { opacity: .8; font-weight: 500; margin-left: .25rem; }
   h2 { margin-top: 0; }
   .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: 1rem; }
+  .shot { padding: 0; border: 0; background: none; cursor: zoom-in; }
   .shots img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border, rgba(128,128,128,.25)); display: block; }
   @media (max-width: 560px) { .shots { grid-template-columns: 1fr; } }
   .meta { margin: 1.5rem 0 0; }
   .meta .tag:first-child { margin-left: 0; }
   .note { font-size: .9rem; margin-top: 1.5rem; padding-left: .9rem; border-left: 3px solid var(--red-tint); }
+</style>
+<style is:global>
+  #lightbox { max-width: 96vw; max-height: 96dvh; padding: 0; border: 0; background: transparent; overflow: visible; }
+  #lightbox::backdrop { background: rgba(0, 0, 0, .8); }
+  #lightbox img { display: block; max-width: 96vw; max-height: 92dvh; border-radius: 10px; }
+  #lightbox .close { position: absolute; top: -14px; right: -6px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--red); color: #fff; font-size: 1.3rem; line-height: 1; cursor: pointer; }
 </style>
