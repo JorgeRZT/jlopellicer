@@ -1,0 +1,18 @@
+---
+import { ui, type Lang } from '../i18n';
+import { contact } from '../data/profile';
+const { lang } = Astro.props as { lang: Lang };
+---
+<footer>
+  <span>© {new Date().getFullYear()} {contact.name}</span>
+  <span class="sep" aria-hidden="true">·</span>
+  <a href={contact.linkedin} rel="me noopener">LinkedIn</a>
+  {contact.github && <><span class="sep" aria-hidden="true">·</span><a href={contact.github} rel="me noopener">GitHub</a></>}
+  <span class="sep" aria-hidden="true">·</span>
+  <a href={`mailto:${contact.email}`}>Email</a>
+</footer>
+<style>
+  footer { flex: none; display: flex; justify-content: center; flex-wrap: wrap; gap: .4rem; padding: .6rem 16px .8rem; font-size: .75rem; color: var(--muted); }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--red); }
+</style>

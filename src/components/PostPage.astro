@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { ui, path, otherLang, type Lang } from '../i18n';
+const { lang, post } = Astro.props as { lang: Lang; post: Awaited<ReturnType<typeof getCollection<'blog'>>>[number] };
+const t = ui[lang];
+const slug = post.id.slice(3);
+const other = otherLang(lang);
+const translated = (await getCollection('blog', (p) => p.id === `${other}/${slug}` && !p.data.draft)).length > 0;
+const { Content } = await render(post);
+const fmt = new Intl.DateTimeFormat(t.dateLocale, { dateStyle: 'long' });
+const here = `${path(lang, 'blog')}${slug}/`;
+const there = `${path(other, 'blog')}${slug}/`;
+---
+<Base
+  lang={lang}
+  title={post.data.title}
+  description={post.data.description}
+  alt={translated ? there : path(other, 'blog')}
+  alternates={translated ? { [lang]: here, [other]: there } : undefined}
+>
+  <div class="wrap">
+    <article class="page-head prose" style="padding-bottom:4rem">
+      <p class="eyebrow">{fmt.format(post.data.date)}</p>
+      <h1 style="font-size:clamp(2rem,5vw,3rem)">{post.data.title}</h1>
+      <Content />
+      <p><a href={path(lang, 'blog')}>{t.blog.back}</a></p>
+    </article>
+  </div>
+</Base>

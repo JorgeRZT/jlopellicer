@@ -1,0 +1,72 @@
+:root {
+  --frame: #efe2dd;
+  --bg: #fbf8f6;
+  --surface: #ffffff;
+  --soft: #f3eeeb;
+  --line: #e9e1dc;
+  --ink: #1f1a18;
+  --muted: #7a6f6a;
+  --red: #e0291b;
+  --red-dark: #bd1d10;
+  --red-tint: #fdeceb;
+  --shadow: 0 1px 2px rgba(60, 20, 10, .06), 0 8px 24px rgba(60, 20, 10, .08);
+  --radius: 18px;
+  --font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --frame: #0e0a0a; --bg: #171212; --surface: #211a19; --soft: #2a2120; --line: #3a2e2c;
+    --ink: #f4eeec; --muted: #a8998f; --red: #ff4a3a; --red-dark: #ff6a5c; --red-tint: #3a1a17;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px rgba(0, 0, 0, .4);
+  }
+}
+* { box-sizing: border-box; }
+html { height: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; height: 100%; padding: 12px; display: flex; flex-direction: column;
+  background: var(--frame); color: var(--ink); font: 16px/1.65 var(--font); -webkit-font-smoothing: antialiased;
+}
+@supports (height: 100dvh) { body { height: 100dvh; } }
+a { color: var(--red); text-decoration: none; }
+a:hover { color: var(--red-dark); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { body { padding: 6px; } }
+.frame { flex: 1; min-height: 0; display: flex; background: var(--bg); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+main { flex: 1; min-height: 0; overflow-y: auto; }
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 { line-height: 1.2; letter-spacing: -.02em; margin: 0 0 .5em; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; }
+h2 { font-size: 1.15rem; }
+h3 { font-size: 1.02rem; }
+.eyebrow { display: inline-block; color: var(--red); background: var(--red-tint); font-weight: 600; font-size: .78rem; padding: .2rem .7rem; border-radius: 999px; margin: 0 0 1rem; }
+.muted { color: var(--muted); }
+.prose { max-width: 680px; }
+.prose img { max-width: 100%; border-radius: 12px; }
+.lead { font-size: 1.15rem; margin: 0 0 1rem; }
+
+.btn { display: inline-block; background: var(--red); color: #fff; padding: .55rem 1.2rem; border-radius: 999px; font-weight: 600; font-size: .95rem; transition: background .15s; }
+.btn:hover { background: var(--red-dark); color: #fff; text-decoration: none; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { border-color: var(--red); color: var(--red); }
+.cta { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.card { display: block; padding: 1.1rem 1.25rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .15s, box-shadow .15s, transform .15s; }
+a.card:hover { border-color: var(--red); box-shadow: var(--shadow); transform: translateY(-1px); text-decoration: none; color: var(--ink); }
+.card h3 { margin-bottom: .3rem; }
+.card p { margin: 0; color: var(--muted); font-size: .95rem; }
+.tag { display: inline-block; font-size: .78rem; padding: .15rem .65rem; border-radius: 999px; background: var(--soft); color: var(--muted); margin: .6rem .35rem 0 0; }
+
+.timeline { list-style: none; padding: 0; margin: 0; }
+.timeline li { display: grid; grid-template-columns: 150px 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid var(--line); }
+.timeline li:last-child { border-bottom: 0; }
+.timeline .period { color: var(--muted); font-size: .85rem; padding-top: .15rem; }
+.timeline strong { display: block; font-weight: 600; }
+.desc { display: block; margin-top: .25rem; font-size: .95rem; }
+.list { margin: 0; padding-left: 1.2rem; }
+.list li { margin: .2rem 0; }
+.list li::marker { color: var(--red); }
+@media (max-width: 600px) { .timeline li { grid-template-columns: 1fr; gap: .1rem; } .wrap { padding: 0 16px; } }
+
+.page-head { padding: 3rem 0 1.5rem; }

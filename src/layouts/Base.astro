@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import { ui, path, otherLang, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Path of the same page in the other language (omit to link to its home). */
+  alt?: string;
+  /** Path of this page in each language, for hreflang. */
+  alternates?: Partial<Record<Lang, string>>;
+}
+const { lang, title, description = ui[lang].siteDescription, alt, alternates } = Astro.props;
+const t = ui[lang];
+const full = title ? `${title} · Jorge López Pellicer` : t.siteTitle;
+const abs = (p: string) => new URL(p, Astro.site).href;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{full}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={abs(Astro.url.pathname)} />
+    {alternates && Object.entries(alternates).map(([l, p]) => <link rel="alternate" hreflang={l} href={abs(p!)} />)}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={full} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+  </head>
+  <body>
+    <div class="frame">
+      <Sidebar lang={lang} alt={alt ?? path(otherLang(lang))} />
+      <div class="content">
+        <main><slot /></main>
+        <Footer lang={lang} />
+      </div>
+    </div>
+  </body>
+</html>

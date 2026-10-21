@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { ui, path, otherLang, type Lang } from '../i18n';
+import { apps } from '../data/apps';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang].apps;
+---
+<Base lang={lang} title="Apps" description={t.lead} alt={path(otherLang(lang), 'apps')} alternates={{ es: path('es', 'apps'), en: path('en', 'apps') }}>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">{t.eyebrow}</p>
+      <h1>{t.title}</h1>
+      <p class="muted">{t.lead}</p>
+    </div>
+    <div class="grid" style="padding-bottom:4rem">
+      {apps.map((a) => (
+        <a class="card" href={a.url} target="_blank" rel="noopener">
+          <h3>{a.name} ↗</h3>
+          <p>{a.description[lang]}</p>
+          {a.status && <span class="tag">{a.status[lang]}</span>}
+          {a.tags?.map((x) => <span class="tag">{x}</span>)}
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

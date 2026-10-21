@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { ui, path, otherLang, type Lang } from '../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const t = ui[lang];
+const posts = (await getCollection('blog', (p) => p.id.startsWith(`${lang}/`) && !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const fmt = new Intl.DateTimeFormat(t.dateLocale, { dateStyle: 'long' });
+---
+<Base lang={lang} title="Blog" alt={path(otherLang(lang), 'blog')} alternates={{ es: path('es', 'blog'), en: path('en', 'blog') }}>
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">{t.blog.eyebrow}</p>
+      <h1>{t.blog.title}</h1>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr;padding-bottom:4rem">
+      {posts.length === 0 && <p class="muted">{t.blog.empty}</p>}
+      {posts.map((p) => (
+        <a class="card" href={`${path(lang, 'blog')}${p.id.slice(3)}/`}>
+          <h3>{p.data.title}</h3>
+          <p>{p.data.description}</p>
+          <span class="tag">{fmt.format(p.data.date)}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
