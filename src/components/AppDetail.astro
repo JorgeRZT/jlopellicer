@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import AppIcon from './AppIcon.astro';
+import { ui, path, otherLang, type Lang } from '../i18n';
+import { latestDownload, type App } from '../data/apps';
+const { lang, app } = Astro.props as { lang: Lang; app: App };
+const t = ui[lang].apps;
+const dl = await latestDownload(app);
+const here = path(lang, `apps/${app.slug}`);
+const there = path(otherLang(lang), `apps/${app.slug}`);
+const repoUrl = `https://github.com/${app.repo}`;
+---
+<Base lang={lang} title={app.name} description={app.description[lang]} alt={there} alternates={{ [lang]: here, [otherLang(lang)]: there }}>
+  <div class="wrap">
+    <article class="detail">
+      <a class="back" href={path(lang, 'apps')}>{t.back}</a>
+      <header class="head">
+        <AppIcon app={app} size={72} />
+        <div>
+          <h1>{app.name}</h1>
+          <p class="muted">{app.description[lang]}</p>
+        </div>
+      </header>
+
+      <p class="cta">
+        {dl && <a class="btn" href={dl.url} download>⬇ {t.download} <small>{dl.version}</small></a>}
+        {app.live && <a class="btn" href={app.live} target="_blank" rel="noopener">{t.open} ↗</a>}
+        <a class="btn ghost" href={repoUrl} target="_blank" rel="noopener">{t.repo} ↗</a>
+      </p>
+
+      <h2>{t.features}</h2>
+      <ul class="list">{app.features[lang].map((f) => <li>{f}</li>)}</ul>
+
+      <p class="meta">
+        {app.platform && <span class="tag">{t.platform}: {app.platform[lang]}</span>}
+        {app.tags?.map((x) => <span class="tag">{x}</span>)}
+      </p>
+      {app.note && <p class="muted note">{app.note[lang]}</p>}
+    </article>
+  </div>
+</Base>
+<style>
+  .detail { padding: 2.5rem 0 4rem; max-width: 680px; }
+  .back { font-size: .9rem; color: var(--muted); }
+  .back:hover { color: var(--red); }
+  .head { display: flex; gap: 1.2rem; align-items: center; margin: 1.5rem 0 1.5rem; }
+  .head h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .2em; }
+  .head p { margin: 0; }
+  .cta { margin: 0 0 2rem; }
+  .btn small { opacity: .8; font-weight: 500; margin-left: .25rem; }
+  h2 { margin-top: 0; }
+  .meta { margin: 1.5rem 0 0; }
+  .meta .tag:first-child { margin-left: 0; }
+  .note { font-size: .9rem; margin-top: 1.5rem; padding-left: .9rem; border-left: 3px solid var(--red-tint); }
+</style>

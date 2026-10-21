@@ -4,6 +4,7 @@ import Base from '../layouts/Base.astro';
 import { ui, path, otherLang, type Lang } from '../i18n';
 import { contact, content } from '../data/profile';
 import { apps } from '../data/apps';
+import AppIcon from './AppIcon.astro';
 
 const { lang } = Astro.props as { lang: Lang };
 const t = ui[lang];
@@ -83,14 +84,17 @@ const fmt = new Intl.DateTimeFormat(t.dateLocale, { dateStyle: 'long' });
       </div>
       <div data-key="apps">
         <h2>{t.apps.title}</h2>
-        <div class="grid">
+        <div class="app-list">
           {apps.map((a) => (
-            <a class="card" href={a.url} target="_blank" rel="noopener">
-              <h3>{a.name} ↗</h3>
-              <p>{a.description[lang]}</p>
-              {a.status && <span class="tag">{a.status[lang]}</span>}
-              {a.tags?.map((x) => <span class="tag">{x}</span>)}
-            </a>
+            <a class="app-row" href={path(lang, `apps/${a.slug}`)}>
+          <AppIcon app={a} size={40} />
+          <div class="info">
+            <h3>{a.name}</h3>
+            <p>{a.description[lang]}</p>
+            <div class="tags">{a.tags?.map((x) => <span class="tag">{x}</span>)}</div>
+          </div>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
           ))}
         </div>
         <p><a href={path(lang, 'apps')}>{t.chat.allApps}</a></p>
@@ -214,12 +218,13 @@ const fmt = new Intl.DateTimeFormat(t.dateLocale, { dateStyle: 'long' });
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const items: { node: Text; full: string }[] = [];
     for (let n = walker.nextNode() as Text | null; n; n = walker.nextNode() as Text | null) {
-      if (n.data.trim()) items.push({ node: n, full: n.data });
+      if (n.data.trim() && !n.parentElement?.closest('[aria-hidden="true"]')) items.push({ node: n, full: n.data });
     }
     const total = items.reduce((sum, i) => sum + i.full.length, 0);
     if (!total) return;
 
-    const all = [...root.querySelectorAll<HTMLElement>('*')];
+    // Only elements that wrap typed text are hidden; icons and decorations stay visible.
+    const all = [...root.querySelectorAll<HTMLElement>('*')].filter((e) => items.some((i) => e.contains(i.node)));
     all.forEach((e) => e.classList.add('tw-hide'));
     items.forEach((i) => (i.node.data = ''));
 

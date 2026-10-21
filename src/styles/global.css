@@ -70,3 +70,16 @@ a.card:hover { border-color: var(--red); box-shadow: var(--shadow); transform: t
 @media (max-width: 600px) { .timeline li { grid-template-columns: 1fr; gap: .1rem; } .wrap { padding: 0 16px; } }
 
 .page-head { padding: 3rem 0 1.5rem; }
+
+/* App list: horizontal rows */
+.app-list { display: flex; flex-direction: column; gap: 10px; }
+.app-row { display: flex; align-items: center; gap: 1rem; padding: .9rem 1.1rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); transition: border-color .15s, box-shadow .15s; }
+.app-row:hover { border-color: var(--red); box-shadow: var(--shadow); text-decoration: none; color: var(--ink); }
+.app-row .info { flex: 1; min-width: 0; }
+.app-row h3 { margin: 0 0 .15rem; }
+.app-row p { margin: 0; color: var(--muted); font-size: .93rem; }
+.app-row .tags { margin-top: .45rem; }
+.app-row .tags .tag { margin: 0 .35rem 0 0; }
+.app-row .go { flex: none; color: var(--muted); font-size: 1.2rem; transition: transform .15s, color .15s; }
+.app-row:hover .go { color: var(--red); transform: translateX(3px); }
+@media (max-width: 480px) { .app-row .go { display: none; } }
