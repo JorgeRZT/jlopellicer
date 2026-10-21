@@ -14,6 +14,8 @@ export interface App {
   note?: L10n;
   /** Path under /public. Without it, a letter tile is shown. */
   icon?: string;
+  /** Screenshots under /public, with a localized caption. */
+  screenshots?: { src: string; alt: L10n }[];
   /** Hosted instance, if the app is a web service. */
   live?: string;
   /** Show a download button built from the latest GitHub release. */
@@ -49,6 +51,12 @@ export const apps: App[] = [
       en: 'Independent, unofficial tool; not an Adobe product. The app is not signed by Apple, so macOS will warn you the first time you open it. Figures are approximations, not an official metric.',
     },
     download: true,
+    screenshots: [
+      { src: '/apps/aem-conest/dashboard-summary.png', alt: { es: 'Dashboard: resumen de peticiones', en: 'Dashboard: requests summary' } },
+      { src: '/apps/aem-conest/dashboard-domains.png', alt: { es: 'Dashboard: peticiones por dominio', en: 'Dashboard: requests by domain' } },
+      { src: '/apps/aem-conest/dashboard-date-range.png', alt: { es: 'Dashboard: filtro por rango de fechas', en: 'Dashboard: date range filter' } },
+      { src: '/apps/aem-conest/dashboard-day-domain-heatmap.png', alt: { es: 'Dashboard: mapa de calor por día y dominio', en: 'Dashboard: day and domain heatmap' } },
+    ],
   },
   {
     slug: 'my-custom-api',

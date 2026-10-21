@@ -31,6 +31,17 @@ const repoUrl = `https://github.com/${app.repo}`;
       <h2>{t.features}</h2>
       <ul class="list">{app.features[lang].map((f) => <li>{f}</li>)}</ul>
 
+      {app.screenshots && (
+        <>
+          <h2>{t.screenshots}</h2>
+          <div class="shots">
+            {app.screenshots.map((x) => (
+              <a href={x.src} target="_blank" rel="noopener"><img src={x.src} alt={x.alt[lang]} loading="lazy" width="1120" height="800" /></a>
+            ))}
+          </div>
+        </>
+      )}
+
       <p class="meta">
         {app.platform && <span class="tag">{t.platform}: {app.platform[lang]}</span>}
         {app.tags?.map((x) => <span class="tag">{x}</span>)}
@@ -49,6 +60,9 @@ const repoUrl = `https://github.com/${app.repo}`;
   .cta { margin: 0 0 2rem; }
   .btn small { opacity: .8; font-weight: 500; margin-left: .25rem; }
   h2 { margin-top: 0; }
+  .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: .8rem; margin-top: 1rem; }
+  .shots img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border, rgba(128,128,128,.25)); display: block; }
+  @media (max-width: 560px) { .shots { grid-template-columns: 1fr; } }
   .meta { margin: 1.5rem 0 0; }
   .meta .tag:first-child { margin-left: 0; }
   .note { font-size: .9rem; margin-top: 1.5rem; padding-left: .9rem; border-left: 3px solid var(--red-tint); }
