@@ -64,21 +64,21 @@ export const apps: App[] = [
     repo: 'JorgeRZT/Stagehand',
     icon: '/apps/stagehand.png',
     description: {
-      es: 'App de escritorio para arrancar, parar y leer los logs de tus instancias locales de Adobe Experience Manager (Author y Publish), agrupadas en workspaces.',
-      en: 'Desktop app to start, stop and read the logs of your local Adobe Experience Manager instances (Author and Publish), grouped in workspaces.',
+      es: 'Gestor de entornos locales de Adobe Experience Manager: organiza tus instancias Author y Publish en workspaces y créalas, configúralas, arráncalas, páralas y consulta sus logs desde una sola app.',
+      en: 'Local environment manager for Adobe Experience Manager: organize your Author and Publish instances in workspaces and create, configure, start, stop and read the logs of each one from a single app.',
     },
     features: {
       es: [
-        'Workspaces para agrupar entornos, por ejemplo uno por cliente o proyecto.',
+        'Workspaces para agrupar entornos, por ejemplo uno por cliente o proyecto, cada uno con su Author y su Publish.',
+        'Asistente para crear entornos y ajustes por entorno: carpeta y JAR, puerto, runmodes, opciones de JVM (p. ej. depuración remota) y comandos personalizados.',
         'Estado en vivo de cada instancia (parada, arrancando, en marcha, parando) con botones de arrancar, parar, abrir en el navegador y abrir carpeta.',
         'Visor de logs en tiempo real (error.log, stdout.log, request.log…) con búsqueda y filtros por nivel.',
-        'Ajustes por entorno: puerto, runmodes, opciones de JVM (p. ej. depuración remota) y comandos personalizados.',
       ],
       en: [
-        'Workspaces to group environments, for example one per client or project.',
+        'Workspaces to group environments, for example one per client or project, each with its own Author and Publish.',
+        'Wizard to create environments and per-environment settings: folder and JAR, port, runmodes, JVM options (e.g. remote debug) and custom commands.',
         'Live status for every instance (stopped, starting, running, stopping) with start, stop, open in browser and open folder buttons.',
         'Real-time log viewer (error.log, stdout.log, request.log…) with text search and level filters.',
-        'Per-environment settings: port, runmodes, JVM options (e.g. remote debug) and custom commands.',
       ],
     },
     tags: ['macOS', 'Rust', 'Tauri', 'AEM'],
