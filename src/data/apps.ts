@@ -59,6 +59,43 @@ export const apps: App[] = [
     ],
   },
   {
+    slug: 'stagehand',
+    name: 'Stagehand',
+    repo: 'JorgeRZT/Stagehand',
+    icon: '/apps/stagehand.png',
+    description: {
+      es: 'App de escritorio para arrancar, parar y leer los logs de tus instancias locales de Adobe Experience Manager (Author y Publish), agrupadas en workspaces.',
+      en: 'Desktop app to start, stop and read the logs of your local Adobe Experience Manager instances (Author and Publish), grouped in workspaces.',
+    },
+    features: {
+      es: [
+        'Workspaces para agrupar entornos, por ejemplo uno por cliente o proyecto.',
+        'Estado en vivo de cada instancia (parada, arrancando, en marcha, parando) con botones de arrancar, parar, abrir en el navegador y abrir carpeta.',
+        'Visor de logs en tiempo real (error.log, stdout.log, request.log…) con búsqueda y filtros por nivel.',
+        'Ajustes por entorno: puerto, runmodes, opciones de JVM (p. ej. depuración remota) y comandos personalizados.',
+      ],
+      en: [
+        'Workspaces to group environments, for example one per client or project.',
+        'Live status for every instance (stopped, starting, running, stopping) with start, stop, open in browser and open folder buttons.',
+        'Real-time log viewer (error.log, stdout.log, request.log…) with text search and level filters.',
+        'Per-environment settings: port, runmodes, JVM options (e.g. remote debug) and custom commands.',
+      ],
+    },
+    tags: ['macOS', 'Rust', 'Tauri', 'AEM'],
+    platform: { es: 'macOS (Apple Silicon); Linux y Windows sin probar', en: 'macOS (Apple Silicon); Linux and Windows untested' },
+    note: {
+      es: 'Herramienta independiente y no oficial, no es un producto de Adobe. La app no está firmada ni notarizada: en el primer arranque, clic derecho y «Abrir».',
+      en: 'Independent, unofficial tool; not an Adobe product. The app is not signed or notarized: on first launch, right-click and choose Open.',
+    },
+    download: true,
+    screenshots: [
+      { src: '/apps/stagehand/running-author-logs.png', alt: { es: 'Instancia Author en marcha con su error.log en vivo', en: 'Running Author instance with its live error.log' } },
+      { src: '/apps/stagehand/workspace-environments.png', alt: { es: 'Workspace con entornos Author y Publish', en: 'Workspace with Author and Publish environments' } },
+      { src: '/apps/stagehand/new-environment-wizard.png', alt: { es: 'Asistente de nuevo entorno', en: 'New environment wizard' } },
+      { src: '/apps/stagehand/log-file-picker.png', alt: { es: 'Selector de archivo de log', en: 'Log file picker' } },
+    ],
+  },
+  {
     slug: 'my-custom-api',
     name: 'My Custom API',
     repo: 'JorgeRZT/my-custom-api',
