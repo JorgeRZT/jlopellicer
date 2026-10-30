@@ -109,11 +109,13 @@ export const apps: App[] = [
         'Convierte un .exe y su carpeta en una .app con icono, Dock y doble clic, usando un runtime de compatibilidad (no traduce el código).',
         'Interfaz SwiftUI con biblioteca de programas guardados, y pestaña para ejecutar un programa al instante sin crear nada.',
         'Herramienta de línea de comandos con perfiles, y elección de backend gráfico: Direct3D 11/12 con D3DMetal, DXVK u OpenGL.',
+        'Opciones de sincronización por separado (MSYNC, ESYNC y VSync), con descripción en cada ajuste y aviso si falta MoltenVK para DXVK.',
       ],
       en: [
         'Turns an .exe and its folder into an .app with icon, Dock presence and double-click, using a compatibility runtime (it does not translate code).',
         'SwiftUI interface with a library of saved programs, and a tab to run a program right away without creating anything.',
         'Command-line tool with profiles, and a choice of graphics backend: Direct3D 11/12 with D3DMetal, DXVK or OpenGL.',
+        'Separate synchronization options (MSYNC, ESYNC and VSync), a tooltip on every setting, and a warning when MoltenVK is missing for DXVK.',
       ],
     },
     tags: ['macOS', 'Swift', 'Bash', 'Wine'],
