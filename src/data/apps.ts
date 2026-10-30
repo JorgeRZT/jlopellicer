@@ -96,6 +96,35 @@ export const apps: App[] = [
     ],
   },
   {
+    slug: 'dmgexe',
+    name: 'Dmgexe',
+    repo: 'JorgeRZT/Dmgexe',
+    icon: '/apps/dmgexe.svg',
+    description: {
+      es: 'App para arrancar aplicaciones EXE en macOS: empaqueta un programa de Windows como una .app que se abre con doble clic.',
+      en: 'App to run EXE applications on macOS: packages a Windows program as a double-clickable .app.',
+    },
+    features: {
+      es: [
+        'Convierte un .exe y su carpeta en una .app con icono, Dock y doble clic, usando un runtime de compatibilidad (no traduce el código).',
+        'Interfaz SwiftUI con biblioteca de programas guardados, y pestaña para ejecutar un programa al instante sin crear nada.',
+        'Herramienta de línea de comandos con perfiles, y elección de backend gráfico: Direct3D 11/12 con D3DMetal, DXVK u OpenGL.',
+      ],
+      en: [
+        'Turns an .exe and its folder into an .app with icon, Dock presence and double-click, using a compatibility runtime (it does not translate code).',
+        'SwiftUI interface with a library of saved programs, and a tab to run a program right away without creating anything.',
+        'Command-line tool with profiles, and a choice of graphics backend: Direct3D 11/12 with D3DMetal, DXVK or OpenGL.',
+      ],
+    },
+    tags: ['macOS', 'Swift', 'Bash', 'Wine'],
+    platform: { es: 'macOS 13 o superior (Apple Silicon recomendado)', en: 'macOS 13 or later (Apple Silicon recommended)' },
+    note: {
+      es: 'La app está firmada solo ad hoc: si macOS la bloquea, clic derecho y «Abrir». La compatibilidad depende de cada programa.',
+      en: 'The app is only ad-hoc signed: if macOS blocks it, right-click and choose Open. Compatibility depends on each program.',
+    },
+    download: true,
+  },
+  {
     slug: 'my-custom-api',
     name: 'My Custom API',
     repo: 'JorgeRZT/my-custom-api',
